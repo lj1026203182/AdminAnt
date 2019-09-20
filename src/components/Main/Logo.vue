@@ -1,9 +1,9 @@
 <template>
   <div class="logo">
-    <router-link :to="{ name: $config.homeName }">
-      <!-- <img src="../../assets/image/logo.svg" alt="" /> -->
-      <div class="fontsize_32 white flex_center">{{ title }}</div>
-    </router-link>
+    <img src="../../assets/image/logo.svg" alt="" />
+    <h1>
+      {{ title }}
+    </h1>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Ant Design Pro',
+      default: 'Ant Design',
       required: false
     },
     showTitle: {
@@ -24,3 +24,5 @@ export default {
   }
 }
 </script>
+<style>
+</style>

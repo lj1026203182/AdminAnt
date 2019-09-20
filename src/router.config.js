@@ -10,15 +10,17 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Main',
+    name: 'Index',
     hidden: false,
+    meta: { title: '首页', icon: 'home' },
     component: Main,
+    redirect: '/home',
     children: [
       {
         path: '/home',
         name: 'Home',
         hidden: false,
-        meta: { title: '首页', keepAlive: true, icon: 'home' },
+        meta: { title: '首页', keepAlive: true },
         component: () => import('./views/Home/Home.vue')
       }
     ]
@@ -34,14 +36,14 @@ const routes = [
         path: 'user',
         name: 'UserManage',
         hidden: false,
-        meta: { title: '用户管理', keepAlive: true },
+        meta: { title: '用户管理1', keepAlive: true },
         component: () => import('./views/User/User.vue')
       },
       {
         path: 'userType',
         name: 'UserType',
         hidden: false,
-        meta: { title: '用户类型管理', keepAlive: true },
+        meta: { title: '用户类型管理1', keepAlive: true },
         component: () => import('./views/User/UserType.vue')
       }
     ]
@@ -51,7 +53,7 @@ const routes = [
     name: 'Account',
     hidden: false,
     component: Main,
-    meta: { title: '用户管理', icon: 'team' },
+    meta: { title: '成员管理', icon: 'team' },
     children: [
       {
         path: 'user1',
@@ -78,6 +80,7 @@ const routes = [
   },
   {
     path: '/404',
+    hidden: true,
     component: () => import(/* webpackChunkName: "fail" */ './views/Error/404.vue')
   },
   {

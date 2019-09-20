@@ -7,28 +7,29 @@
       theme="dark"
       :collapsed="collapsed"
       collapsible
-      @onSelect="turnToPage"
+      @menuSelect="turnToPage"
     ></side-menu>
 
-    <a-layout class="sidemenu">
+    <a-layout
+      class="sidemenu h_100"
+      :style="{ paddingLeft: contentPaddingLeft }"
+    >
       <!-- layout header -->
-      <MainHeader
-        :menus="menus"
-        theme="dark"
-        :collapsed="collapsed"
-        @toggle="toggle"
-      />
+      <main-header :collapsed="collapsed" @toggle="toggle" />
+
+      <!-- 多标签选项栏 -->
+      <multi-tab />
 
       <!-- layout content -->
       <a-layout-content
-        style="{
-          height: '100%';
-          margin: '24px 24px 0';
-          paddingTop: '64px'
-        }"
+        :style="{ padding: '16px', height: '100%', minHeight: '360px' }"
       >
         <transition name="page-transition">
-          <route-view />
+          <keep-alive>
+            <!--使用keep-alive会将页面缓存-->
+            <router-view v-if="$route.meta.keepAlive"></router-view>
+          </keep-alive>
+          <router-view v-if="!$route.meta.keepAlive"></router-view>
         </transition>
       </a-layout-content>
 
@@ -41,60 +42,61 @@
 </template>
 
 <script>
+import { triggerWindowResizeEvent } from '../../util/util'
 import RouteView from '../../components/Main/RouteView'
 import SideMenu from '../../components/Main/SideMenu'
-import MainHeader from '../../components/Main/Header'
+import MainHeader from '../../components/Main/MainHeader'
+import MultiTab from '../../components/Main/index'
 import routes from '../../router.config'
 export default {
   name: 'BasicLayout',
-  components: {
-    RouteView,
-    SideMenu,
-    MainHeader
-  },
   data () {
     return {
       collapsed: false,
       menus: routes
     }
   },
+  components: {
+    RouteView,
+    SideMenu,
+    MainHeader,
+    MultiTab
+  },
   computed: {
   },
   watch: {
-    sidebarOpened (val) {
-      this.collapsed = !val
-    }
+
   },
   created () {
-    // this.menus = routes
-    console.log(this.menus);
+  },
+  mounted () {
+
+  },
+  computed: {
+    contentPaddingLeft () {
+      if (!this.collapsed) {
+        return '256px'
+      }
+      return '80px'
+    },
+
+  },
+  watch: {
+
   },
   methods: {
     toggle () {
       this.collapsed = !this.collapsed
-      this.setSidebar(!this.collapsed)
       triggerWindowResizeEvent()
-    },
-    paddingCalc () {
-      let left = ''
-      if (this.sidebarOpened) {
-        left = this.isDesktop() ? '256px' : '80px'
-      } else {
-        left = (this.isMobile() && '0') || ((this.fixSidebar && '80px') || '0')
-      }
-      return left
-    },
-    menuSelect () {
-      if (!this.isDesktop()) {
-        this.collapsed = false
-      }
     },
     drawerClose () {
       this.collapsed = false
     },
     // 跳转
     turnToPage (route) {
-      this.$router.push({ name: route.key })
+      let { name, key } = {}
+      { name = route.name || route.key }
+      this.$router.push({ name })
     },
   }
 }

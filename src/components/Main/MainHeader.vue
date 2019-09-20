@@ -1,18 +1,21 @@
 <template>
-  <transition name="showHeader">
-    <div v-if="visible" class="header-animat">
-      <a-layout-header v-if="visible" :style="{ padding: '0' }">
-        <div class="header">
-          <a-icon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="toggle"
-          />
-          <user-menu></user-menu>
-        </div>
-      </a-layout-header>
-    </div>
-  </transition>
+  <div v-if="visible">
+    <a-layout-header
+      v-if="visible"
+      :style="{ padding: '0' }"
+      class="ant-header-fixedHeader"
+    >
+      <div class="header">
+        <a-icon
+          class="trigger"
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="toggle"
+        />
+        <user-menu></user-menu>
+      </div>
+    </a-layout-header>
+  </div>
+  <!-- </transition> -->
 </template>
 
 <script>
@@ -38,10 +41,6 @@ export default {
   },
   methods: {
     handleScroll () {
-      if (!this.autoHideHeader) {
-        return
-      }
-
       const scrollTop = document.body.scrollTop + document.documentElement.scrollTop
       if (!this.ticking) {
         this.ticking = true
@@ -69,11 +68,9 @@ export default {
 </script>
 
 <style lang="less">
-@import './index.less';
-
 .header-animat {
   position: relative;
-  z-index: @ant-global-header-zindex;
+  z-index: 105;
 }
 .showHeader-enter-active {
   transition: all 0.25s ease;

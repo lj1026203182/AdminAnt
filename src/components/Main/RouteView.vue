@@ -1,17 +1,10 @@
 <script>
 export default {
   name: 'RouteView',
-  props: {
-    keepAlive: {
-      type: Boolean,
-      default: true
-    }
-  },
   data () {
     return {}
   },
   render () {
-    const { $route: { meta } } = this
     const inKeep = (
       <keep-alive>
         <router-view />
@@ -20,7 +13,7 @@ export default {
     const notKeep = (
       <router-view />
     )
-    return meta.keepAlive ? inKeep : notKeep
+    return this.$route.meta.keepAlive ? inKeep : notKeep
   }
 }
 </script>
