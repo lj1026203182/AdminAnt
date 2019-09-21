@@ -8,7 +8,7 @@ export const showTitle = item => {
 /**
  * 触发 window.resize
  */
-export function triggerWindowResizeEvent () {
+export const triggerWindowResizeEvent = () => {
   const event = document.createEvent('HTMLEvents')
   event.initEvent('resize', true, true)
   event.eventType = 'message'

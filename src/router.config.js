@@ -20,7 +20,7 @@ const routes = [
         path: '/home',
         name: 'Home',
         hidden: false,
-        meta: { title: '首页', keepAlive: true },
+        meta: { title: '首页', icon: 'home', keepAlive: true },
         component: () => import('./views/Home/Home.vue')
       }
     ]
@@ -33,14 +33,14 @@ const routes = [
     meta: { title: '用户管理', icon: 'team' },
     children: [
       {
-        path: 'user',
+        path: '/user/user',
         name: 'UserManage',
         hidden: false,
         meta: { title: '用户管理1', keepAlive: true },
         component: () => import('./views/User/User.vue')
       },
       {
-        path: 'userType',
+        path: '/user/userType',
         name: 'UserType',
         hidden: false,
         meta: { title: '用户类型管理1', keepAlive: true },
@@ -53,24 +53,24 @@ const routes = [
     name: 'Account',
     hidden: false,
     component: Main,
-    meta: { title: '成员管理', icon: 'team' },
+    meta: { title: '系统管理', icon: 'team' },
     children: [
       {
-        path: 'user1',
+        path: '/account/user1',
         name: 'User1',
         hidden: false,
         meta: { title: '用户管理', keepAlive: true },
         component: () => import('./views/User/User.vue')
       },
       {
-        path: 'userType1',
+        path: '/account/userType1',
         name: 'UserType1',
         hidden: false,
         meta: { title: '用户类型管理', keepAlive: true },
         component: () => import('./views/User/UserType.vue')
       },
       {
-        path: 'userTip',
+        path: '/account/userTip',
         name: 'UserTip',
         hidden: false,
         meta: { title: '用户提示', keepAlive: true, hidden: true },

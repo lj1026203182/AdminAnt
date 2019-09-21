@@ -8,7 +8,7 @@
       :collapsed="collapsed"
       collapsible
       @menuSelect="turnToPage"
-    ></side-menu>
+    />
 
     <a-layout class="sidemenu h_100" :style="{ paddingLeft: contentPaddingLeft }">
       <!-- layout header -->
@@ -20,7 +20,11 @@
       <!-- layout content -->
       <a-layout-content :style="{ padding: '16px', height: '100%', minHeight: '360px' }">
         <transition name="page-transition">
-          <route-view/>
+          <keep-alive>
+            <!--使用keep-alive会将页面缓存-->
+            <router-view v-if="$route.meta.keepAlive" />
+          </keep-alive>
+          <router-view v-if="!$route.meta.keepAlive" />
         </transition>
       </a-layout-content>
 
@@ -34,7 +38,6 @@
 
 <script>
 import { triggerWindowResizeEvent } from '../../util/util'
-import RouteView from '../../components/Main/RouteView'
 import SideMenu from '../../components/Main/SideMenu'
 import MainHeader from '../../components/Main/MainHeader'
 import MultiTab from '../../components/Main/MultiTab'
@@ -44,16 +47,16 @@ export default {
   data () {
     return {
       collapsed: false,
-      menus: routes
+      menus: []
     }
   },
   components: {
-    RouteView,
     SideMenu,
     MainHeader,
     MultiTab
   },
   created () {
+    this.menus = routes
   },
   mounted () {
 
@@ -79,8 +82,7 @@ export default {
     },
     // 跳转
     turnToPage (route) {
-      let name = route.name || route.key
-      this.$router.push({ name })
+      this.$router.push({ name: route.key })
     }
   }
 }

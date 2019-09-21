@@ -48,7 +48,6 @@ export default {
       if (val) {
         this.cachedOpenKeys = this.openKeys.concat()
         this.openKeys = []
-        console.log(this.cachedOpenKeys);
       } else {
         this.openKeys = this.cachedOpenKeys
       }
@@ -90,14 +89,14 @@ export default {
         <Item {...{ key: menu.children ? menu.children[0].name : menu.name }}>
           <span {...{ props }}>
             {this.renderIcon(menu.meta.icon)}
-            <span>{menu.meta.title}</span>
+            <span>{menu.meta.title}00</span>
           </span>
         </Item>
       )
     },
     renderSubMenu (menu) {
       const itemArr = []
-      if (!menu.hideChildrenInMenu) {
+      if (!menu.hidden) {
         menu.children.forEach(item => itemArr.push(this.renderItem(item)))
       }
       return (

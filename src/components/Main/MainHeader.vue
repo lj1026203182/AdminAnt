@@ -9,6 +9,7 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="toggle"
         />
+        <bread-crumb/>
         <user-menu></user-menu>
       </div>
     </a-layout-header>
@@ -17,9 +18,10 @@
 
 <script>
 import UserMenu from './UserMenu'
+import BreadCrumb from './Breadcrumb'
 export default {
   name: 'Header',
-  components: { UserMenu },
+  components: { UserMenu, BreadCrumb },
   props: {
     collapsed: {
       type: Boolean,
