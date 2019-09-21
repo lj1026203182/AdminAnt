@@ -48,7 +48,7 @@ export default {
     }
   },
   components: {
-    RouteView,
+    // RouteView,
     SideMenu,
     MainHeader,
     MultiTab
