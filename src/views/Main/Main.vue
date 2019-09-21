@@ -4,16 +4,13 @@
     <side-menu
       mode="inline"
       :menus="menus"
-      theme="dark"
+      theme="light"
       :collapsed="collapsed"
       collapsible
       @menuSelect="turnToPage"
     ></side-menu>
 
-    <a-layout
-      class="sidemenu h_100"
-      :style="{ paddingLeft: contentPaddingLeft }"
-    >
+    <a-layout class="sidemenu h_100" :style="{ paddingLeft: contentPaddingLeft }">
       <!-- layout header -->
       <main-header :collapsed="collapsed" @toggle="toggle" />
 
@@ -21,15 +18,9 @@
       <multi-tab />
 
       <!-- layout content -->
-      <a-layout-content
-        :style="{ padding: '16px', height: '100%', minHeight: '360px' }"
-      >
+      <a-layout-content :style="{ padding: '16px', height: '100%', minHeight: '360px' }">
         <transition name="page-transition">
-          <keep-alive>
-            <!--使用keep-alive会将页面缓存-->
-            <router-view v-if="$route.meta.keepAlive"></router-view>
-          </keep-alive>
-          <router-view v-if="!$route.meta.keepAlive"></router-view>
+          <route-view/>
         </transition>
       </a-layout-content>
 
@@ -46,7 +37,7 @@ import { triggerWindowResizeEvent } from '../../util/util'
 import RouteView from '../../components/Main/RouteView'
 import SideMenu from '../../components/Main/SideMenu'
 import MainHeader from '../../components/Main/MainHeader'
-import MultiTab from '../../components/Main/index'
+import MultiTab from '../../components/Main/MultiTab'
 import routes from '../../router.config'
 export default {
   name: 'BasicLayout',
@@ -62,11 +53,6 @@ export default {
     MainHeader,
     MultiTab
   },
-  computed: {
-  },
-  watch: {
-
-  },
   created () {
   },
   mounted () {
@@ -79,7 +65,6 @@ export default {
       }
       return '80px'
     }
-
   },
   watch: {
 
@@ -94,8 +79,7 @@ export default {
     },
     // 跳转
     turnToPage (route) {
-      let { name, key } = {}
-      { name = route.name || route.key }
+      let name = route.name || route.key
       this.$router.push({ name })
     }
   }
@@ -103,7 +87,7 @@ export default {
 </script>
 
 <style lang="less">
-@import url('./Main.less');
+@import url("./Main.less");
 
 .page-transition-enter {
   opacity: 0;

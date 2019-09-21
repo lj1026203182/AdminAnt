@@ -1,6 +1,4 @@
 <script>
-import events from './events'
-
 export default {
   name: 'MultiTab',
   data () {
@@ -13,7 +11,7 @@ export default {
   },
   created () {
     // bind event
-    events.$on('open', val => {
+    this.$on('open', val => {
       if (!val) {
         throw new Error(`multi-tab: open tab ${val} err`)
       }
