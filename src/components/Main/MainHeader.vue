@@ -1,8 +1,6 @@
 <template>
-  <div v-if="visible">
     <a-layout-header
       v-if="visible"
-      :style="{ padding: '0' }"
       class="ant-header-fixedHeader"
     >
       <div class="header">
@@ -14,7 +12,6 @@
         <user-menu></user-menu>
       </div>
     </a-layout-header>
-  </div>
   <!-- </transition> -->
 </template>
 
@@ -22,7 +19,7 @@
 import UserMenu from './UserMenu'
 export default {
   name: 'Header',
-  components: { UserMenu, },
+  components: { UserMenu },
   props: {
     collapsed: {
       type: Boolean,

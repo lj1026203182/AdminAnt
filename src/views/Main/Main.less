@@ -46,53 +46,6 @@ body {
     }
   }
 
-  .topmenu {
-    .ant-header-fixedHeader {
-      position: fixed;
-      top: 0;
-      right: 0;
-      z-index: 9;
-      width: 100%;
-      transition: width 0.2s;
-
-      &.ant-header-side-opened {
-        width: 100%;
-      }
-
-      &.ant-header-side-closed {
-        width: 100%;
-      }
-    }
-
-    /* 必须为 topmenu  才能启用流式布局 */
-    &.content-width-Fluid {
-      .header-index-wide {
-        max-width: unset;
-
-        .header-index-left {
-          flex: 1 1 1000px;
-
-          .logo {
-            margin-left: 25px;
-          }
-
-          .ant-menu.ant-menu-horizontal {
-            max-width: calc(100vw - 190px - 238px - 25px);
-            flex: 1 1 calc(100vw - 190px - 238px - 25px);
-          }
-        }
-
-        .header-index-right {
-          margin-right: 25px;
-        }
-      }
-
-      .page-header-index-wide {
-        max-width: unset;
-      }
-    }
-  }
-
   .sidemenu {
     .tag-nav-wrapper {
       height: 40px;
@@ -102,6 +55,8 @@ body {
       z-index: 9;
       width: 100%;
       transition: width 0.2s;
+      padding: 0;
+      margin-bottom: 2px;
     }
   }
 

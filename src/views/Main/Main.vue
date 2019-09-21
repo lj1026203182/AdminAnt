@@ -78,7 +78,7 @@ export default {
         return '256px'
       }
       return '80px'
-    },
+    }
 
   },
   watch: {
@@ -97,7 +97,7 @@ export default {
       let { name, key } = {}
       { name = route.name || route.key }
       this.$router.push({ name })
-    },
+    }
   }
 }
 </script>
